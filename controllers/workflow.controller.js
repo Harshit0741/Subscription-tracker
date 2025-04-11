@@ -46,11 +46,18 @@ export const sendReminders = serve(async (context) => {
         console.log(`🚨 Skipping sleep for testing. Sending ${daysBefore} days before reminder now.`);
         await triggerReminder(context, `${daysBefore} days before reminder`, subs);
 
-        // 💤 Restore this in production:
         // if (reminderDate.isAfter(dayjs())) {
+        //     // Sleep until the reminder date (production logic)
+        //     console.log(`⏳ Sleeping until ${reminderDate.format('YYYY-MM-DD')} to send reminder.`);
         //     await sleepUntilReminder(context, `${daysBefore} days before`, reminderDate);
+        // } else {
+        //     // Send the reminder immediately if the date has passed or it's today
+        //     console.log(`🚨 Sending ${daysBefore} days before reminder now.`);
+        //     await triggerReminder(context, `${daysBefore} days before reminder`, subs);
         // }
     }
+
+
 });
 
 const fetchSubscription = async (context, subscriptionId) => {
